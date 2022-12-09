@@ -42,7 +42,7 @@ const doPlayer = async (accPlayer, ctc, guess) => {
   const ctcPlayer = accPlayer.contract(backend, ctc);
   const { price, totalGuesses, prizePot } = await getStats(ctcPlayer);
 
-  console.log(`${addr} see's price: ${fmt(price)}  totalGuesses: ${totalGuesses} prizePot: ${fmt(prizePot)}`);
+  console.log(`${addr} see's price: ${fmt(price)} ${stdlib.standardUnit} totalGuesses: ${totalGuesses} prizePot: ${fmt(prizePot)} ${stdlib.standardUnit}`);
 
   const [maybe, winner] = await ctcPlayer.safeApis.Player.guess(guess);
   console.log(`${addr} guessed ${guess} ${winner ? "and won" : "and was wrong"} `)
@@ -87,11 +87,11 @@ await backend.Admin(ctcAdmin, {
     adminBefore = await getBalance(accAdmin);
   },
   showWinner: async (who) => {
-    console.log(`Winner! ${stdlib.formatAddress(who)} balance: ${await getBalance(who)} `);
+    console.log(`Winner! ${stdlib.formatAddress(who)} balance: ${fmt(startingBalance)} ${stdlib.standardUnit} -> ${await getBalance(who)} ${stdlib.standardUnit}`);
   },
 });
 
-console.log(`Benefactor addr ${stdlib.formatAddress(accBenefactor)} balance: ${benefactorBefore} => ${await getBalance(accBenefactor)} `);
-console.log(`Admin addr ${stdlib.formatAddress(accAdmin)} balance: ${adminBefore} => ${await getBalance(accAdmin)} `);
+console.log(`Benefactor addr ${stdlib.formatAddress(accBenefactor)} balance: ${benefactorBefore} ${stdlib.standardUnit} => ${await getBalance(accBenefactor)} ${stdlib.standardUnit}`);
+console.log(`Admin addr ${stdlib.formatAddress(accAdmin)} balance: ${adminBefore} ${stdlib.standardUnit} -> ${await getBalance(accAdmin)} ${stdlib.standardUnit}`);
 
-console.log('Goodbye, Admin!');
+console.log('Goodbye cruel world!');
