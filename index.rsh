@@ -72,7 +72,7 @@ export const main = Reach.App(() => {
       }]
     })
     .define(() => {
-      V.totalGuesses.set(numGuesses + 1);
+      V.totalGuesses.set(numGuesses);
       V.prizePot.set(getPercentOf((numGuesses * price) + price, 95));
     });
   // timeout absent, game runs forever until winner
